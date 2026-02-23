@@ -3,30 +3,25 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-// Определения для hold-tap (модификаторы на home row)
-#define HT_GUI &hm LGUI
-#define HT_ALT &hm LALT
-#define HT_CTRL &hm LCTRL
-#define HT_SHIFT &hm LSHFT
-
-&hm {
-    tapping-term-ms = <280>;  // Время для hold vs tap (настрой по вкусу)
-    quick-tap-ms = <150>;    // Для повторного tap
-    flavor = "tap-preferred";
+// Глобальные настройки для hold-tap (применяются к &mt и &lt)
+&ht {
+    tapping-term-ms = <280>;  // Время распознавания tap vs hold
+    quick-tap-ms = <150>;     // Для быстрых повторных tap
+    flavor = "tap-preferred"; // Предпочтение tap, если прервано
 };
 
-/ {
+ / {
     keymap {
         compatible = "zmk,keymap";
 
-        // Base layer: QWERTY (основные буквы)
+        // Base layer: QWERTY с homerow mods (hold на A/S/D/F/J/K/L/; для mods)
         base {
             label = "Base (QWERTY)";
             bindings = <
-&kp Q      &kp W      &kp E      &kp R      &kp T        &kp Y      &kp U      &kp I      &kp O      &kp P
-&HT_GUI    &HT_ALT    &HT_CTRL   &HT_SHIFT  &kp G        &kp H      &HT_SHIFT &HT_CTRL   &HT_ALT   &HT_GUI
-&kp Z      &kp X      &kp C      &kp V      &kp B        &kp N      &kp M      &kp COMMA  &kp DOT   &kp SLASH
-                        &lt 1 SPC  &lt 2 ENT  &lt 3 TAB     &lt 4 BSPC &lt 5 DEL   &lt 6 ESC
+&mt LGUI Q    &mt LALT W    &mt LCTRL E    &mt LSHIFT R    &kp T        &kp Y      &mt RSHIFT U    &mt RCTRL I    &mt RALT O    &mt RGUI P
+&mt LGUI A    &mt LALT S    &mt LCTRL D    &mt LSHIFT F    &kp G        &kp H      &mt RSHIFT J    &mt RCTRL K    &mt RALT L    &mt RGUI SEMI
+&mt LGUI Z    &mt LALT X    &mt LCTRL C    &mt LSHIFT V    &kp B        &kp N      &mt RSHIFT M    &mt RCTRL COMMA &mt RALT DOT  &mt RGUI SLASH
+                           &lt 1 SPACE  &lt 2 ENTER  &lt 3 TAB     &lt 4 BSPC &lt 5 DEL   &lt 6 ESC
             >;
         };
 
@@ -36,8 +31,8 @@
             bindings = <
 &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT     &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR   &kp RPAR
 &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT   &kp BSLH      &kp PIPE   &kp GRAVE  &kp TILDE  &kp LCBR   &kp RCBR
-&kp SEMI   &kp COLON  &kp QUOT   &kp DQT    &kp LESS     &kp GREAT  &kp QMARK  &kp UNDER  &kp PLUS   &trans
-                        &trans     &trans     &trans        &trans     &trans     &trans
+&kp SEMI   &kp COLON  &kp QUOT   &kp DQT    &kp LESS      &kp GREAT  &kp QMARK  &kp UNDER  &kp PLUS   &trans
+                           &trans     &trans     &trans        &trans     &trans     &trans
             >;
         };
 
@@ -48,7 +43,7 @@
 &kp N1     &kp N2     &kp N3     &kp N4     &kp N5       &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
 &trans     &trans     &trans     &trans     &trans       &kp DOT    &kp COMMA  &kp SLASH  &kp ASTRK  &kp MINUS
 &trans     &trans     &trans     &trans     &trans       &kp N0     &kp N1     &kp N2     &kp N3     &kp PLUS
-                        &trans     &trans     &trans       &trans     &trans     &kp EQUAL
+                           &trans     &trans     &trans       &trans     &trans     &kp EQUAL
             >;
         };
 
@@ -57,9 +52,9 @@
             label = "Navigation";
             bindings = <
 &trans     &trans     &trans     &trans     &trans       &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &trans
-&HT_GUI    &HT_ALT    &HT_CTRL   &HT_SHIFT  &trans       &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp INS
+&mt LGUI   &mt LALT   &mt LCTRL  &mt LSHIFT &trans       &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp INS
 &trans     &trans     &trans     &trans     &trans       &kp CAPS   &kp SCR_LK &kp PAUSE  &kp PRTSC  &trans
-                        &trans     &trans     &trans       &trans     &trans     &trans
+                           &trans     &trans     &trans       &trans     &trans     &trans
             >;
         };
 
@@ -70,7 +65,7 @@
 &kp F1     &kp F2     &kp F3     &kp F4     &kp F5       &kp F6     &kp F7     &kp F8     &kp F9     &kp F10
 &trans     &trans     &trans     &trans     &trans       &kp F11    &kp F12    &trans     &trans     &trans
 &trans     &trans     &trans     &trans     &trans       &trans     &trans     &trans     &trans     &trans
-                        &trans     &trans     &trans       &trans     &trans     &trans
+                           &trans     &trans     &trans       &trans     &trans     &trans
             >;
         };
 
@@ -81,18 +76,18 @@
 &trans     &trans     &trans     &trans     &trans       &kp VOL_DN &kp VOL_UP &kp MUTE   &kp BRID   &kp BRIU
 &trans     &trans     &trans     &trans     &trans       &kp MEDIA_PREV &kp MEDIA_PLAY &kp MEDIA_NEXT &trans &trans
 &trans     &trans     &trans     &trans     &trans       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
-                        &trans     &trans     &trans       &trans     &trans     &trans
+                           &trans     &trans     &trans       &trans     &trans     &trans
             >;
         };
 
-        // Layer 6: Mouse emulation (эмуляция мыши, если нужно)
+        // Layer 6: Mouse emulation (эмуляция мыши)
         mouse {
             label = "Mouse";
             bindings = <
 &trans     &trans     &trans     &trans     &trans       &kp MS_BTN1 &kp MS_BTN2 &kp MS_BTN3 &trans   &trans
 &trans     &trans     &trans     &trans     &trans       &kp MS_LEFT &kp MS_DOWN &kp MS_UP  &kp MS_RIGHT &trans
 &trans     &trans     &trans     &trans     &trans       &kp MS_WHL_LEFT &kp MS_WHL_DOWN &kp MS_WHL_UP &kp MS_WHL_RIGHT &trans
-                        &trans     &trans     &trans       &trans     &trans     &trans
+                           &trans     &trans     &trans       &trans     &trans     &trans
             >;
         };
     };
