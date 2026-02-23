@@ -25,7 +25,7 @@
             bindings = <
 &ht LGUI Q    &ht LALT W    &ht LCTRL E    &ht LSHIFT R    &kp T        &kp Y      &ht RSHIFT U    &ht RCTRL I    &ht RALT O    &ht RGUI P
 &ht LGUI A    &ht LALT S    &ht LCTRL D    &ht LSHIFT F    &kp G        &kp H      &ht RSHIFT J    &ht RCTRL K    &ht RALT L    &ht RGUI SEMI
-&ht LGUI Z    &ht LALT X    &ht LCTRL C    &ht LSHIFT V    &kp B        &kp N      &ht RSHIFT M    &ht RCTRL COMMA &ht RALT DOT  &ht RGUI SLASH
+&ht LGUI Z    &ht LALT X    &ht LCTRL C    &ht LSHIFT V    &kp B        &kp N      &ht RSHIFT M    &ht RCTRL COMMA &ht RALT DOT  &ht RGUI FSLH
                            &lt 1 SPACE  &lt 2 ENTER  &lt 3 TAB     &lt 4 BSPC &lt 5 DEL   &lt 6 ESC
             >;
         };
@@ -46,7 +46,7 @@
             label = "Numbers/Numpad";
             bindings = <
 &kp N1     &kp N2     &kp N3     &kp N4     &kp N5       &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
-&trans     &trans     &trans     &trans     &trans       &kp DOT    &kp COMMA  &kp SLASH  &kp ASTRK  &kp MINUS
+&trans     &trans     &trans     &trans     &trans       &kp DOT    &kp COMMA  &kp FSLH   &kp ASTRK  &kp MINUS
 &trans     &trans     &trans     &trans     &trans       &kp N0     &kp N1     &kp N2     &kp N3     &kp PLUS
                            &trans     &trans     &trans       &trans     &trans     &kp EQUAL
             >;
